@@ -1,7 +1,12 @@
 from pydantic import BaseModel, Field
 from pathlib import Path
+from pydantic import BaseModel, Field
+from pathlib import Path
+from platformdirs import user_data_dir
 
-SETTINGS_PATH = Path(__file__).parent / "settings.json"
+APP_DATA_DIR = Path(user_data_dir("Motio", appauthor=False))
+APP_DATA_DIR.mkdir(parents=True, exist_ok=True)
+SETTINGS_PATH = APP_DATA_DIR / "settings.json"
 
 class Settings(BaseModel):
     face_tracking: bool = True
