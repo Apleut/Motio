@@ -5,3 +5,4 @@ pywebview
 pydantic
 numpy
 PyInstaller
+flask
