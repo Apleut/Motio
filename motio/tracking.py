@@ -2,8 +2,22 @@ import mediapipe as mp
 from mediapipe.tasks import python as mp_python
 from mediapipe.tasks.python import vision
 import cv2 as cv
+from pathlib import Path
+import sys
 
-base_options = mp_python.BaseOptions(model_asset_path='assets/blaze_face_short_range.tflite')
+
+def resource_path(relative_path):
+    if getattr(sys, "frozen", False):
+        base_path = Path(sys._MEIPASS)
+    else:
+        base_path = Path(__file__).resolve().parent.parent
+
+    return base_path / relative_path
+
+
+model_path = str(resource_path("assets/blaze_face_short_range.tflite"))
+
+base_options = mp_python.BaseOptions(model_asset_path=model_path)
 options = vision.FaceDetectorOptions(base_options=base_options)
 detector = vision.FaceDetector.create_from_options(options)
 

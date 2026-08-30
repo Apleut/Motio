@@ -1,4 +1,7 @@
 # Build and Release Folders
+*build*
+*dist*
+Motio.spec
 bin-debug/
 bin-release/
 [Oo]bj/
