@@ -1,9 +1,15 @@
 import atexit
 import cv2 as cv
 from motio.tracking import track_face
+from motio.transform import apply_framing
 from motio.settings import settings
 
 cap = cv.VideoCapture(0)
+
+def switch_camera(index: int):
+    global cap
+    cap.release()
+    cap = cv.VideoCapture(index)
 
 @atexit.register
 def cleanup():
@@ -17,9 +23,8 @@ def generate_frames():
             continue
 
         if settings.face_tracking:
-            frame = track_face(frame)
-        # frame = adjust_lowlight(frame)
-        # frame = blur_background(frame)
+            face_box = track_face(frame, smoothing=settings.tracking_smoothing_alpha)
+            frame = apply_framing(frame, face_box, zoom_margin=settings.zoom_margin, smoothing=settings.tracking_smoothing_alpha,)
 
         ret2, buffer = cv.imencode('.jpg', frame)
         if not ret2:

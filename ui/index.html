@@ -1,3 +1,59 @@
 <!DOCTYPE html>
-    <img src="http://127.0.0.1:5001/stream" width="640" height="480">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Motio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <div class="preview">
+      <img id="preview" class="preview__stream" src="http://127.0.0.1:5001/stream" alt="Camera preview">
+    </div>
+
+    <aside class="sidebar">
+
+      <div class="sidebar__header">
+        <img src="../assets/motio-wide-logo.svg" alt="Motio" class="sidebar__logo">
+      </div>
+
+      <div class="field">
+        <label for="cameraSelect">Camera</label>
+        <select id="cameraSelect"></select>
+      </div>
+
+      <div class="section">
+        <div class="section__title">Tracking</div>
+
+        <div class="field field--row">
+          <label for="faceTracking">Face tracking</label>
+          <label class="switch">
+            <input type="checkbox" id="faceTracking" checked>
+            <span class="switch__track"></span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label for="zoomMargin">Framing margin <span class="field__value" id="zoomMarginValue">0.60</span></label>
+          <input type="range" id="zoomMargin" min="0.2" max="1.5" step="0.05" value="0.6">
+        </div>
+
+        <div class="field">
+          <label for="smoothing">Pan smoothing <span class="field__value" id="smoothingValue">0.15</span></label>
+          <input type="range" id="smoothing" min="0" max="0.95" step="0.05" value="0.15">
+        </div>
+      </div>
+
+      <div class="sidebar__footer">
+        <button class="btn" id="resetBtn">Reset to defaults</button>
+      </div>
+
+    </aside>
+
+  </div>
+
+<script src="script.js"></script>
+</body>
 </html>
