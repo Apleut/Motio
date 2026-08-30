@@ -1,5 +1,3 @@
-// motio/ui/script.js
-
 document.getElementById('faceTracking').addEventListener('change', (e) => {
   if (window.pywebview) {
     window.pywebview.api.update_setting('face_tracking', e.target.checked);
@@ -34,9 +32,6 @@ document.getElementById('cameraSelect').addEventListener('change', (e) => {
 });
 
 function populateCameraList(devices) {
-  // devices: list of {index, name} from Python (OpenCV doesn't expose
-  // friendly names on its own - bridge.py will need to supply these,
-  // e.g. via pygrabber or a platform-specific lookup on Windows)
   const select = document.getElementById('cameraSelect');
   select.innerHTML = '';
   devices.forEach((d) => {
@@ -61,6 +56,20 @@ function applySettings(settings) {
 
   if (settings.camera_device !== undefined) {
     document.getElementById('cameraSelect').value = settings.camera_device;
+  }
+}
+
+
+function updateVirtualCamStatus(status) {
+  const el = document.getElementById('virtualCamStatus');
+  if (!el) return;
+
+  if (status.ok) {
+    el.textContent = '';
+    el.classList.remove('status--error');
+  } else {
+    el.textContent = status.error;
+    el.classList.add('status--error');
   }
 }
 

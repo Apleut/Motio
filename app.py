@@ -1,8 +1,11 @@
+import json
 import threading
 import webview
+
 from flask import Flask, Response, send_from_directory
 from motio.capture import generate_frames
 from motio.bridge import Api
+from motio import virtualcam
 
 flask_app = Flask(__name__, static_folder='ui', static_url_path='')
 
@@ -35,6 +38,11 @@ def main():
         height=650,
         min_size=(700, 450),
     )
+
+    def on_virtualcam_status_change(status):
+        window.evaluate_js(f"updateVirtualCamStatus({json.dumps(status)})")
+
+    virtualcam.set_status_callback(on_virtualcam_status_change)
 
     webview.start()
 

@@ -67,6 +67,14 @@ body {
   display: block;
 }
 
+.status {
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.status--error {
+  color: var(--signal, #8E2A28);
+}
+
 .sidebar__footer {
   margin-top: auto;
   padding-top: 12px;

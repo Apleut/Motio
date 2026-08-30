@@ -2,6 +2,7 @@ import atexit
 import cv2 as cv
 from motio.tracking import track_face
 from motio.transform import apply_framing
+from motio.virtualcam import send_frame
 from motio.settings import settings
 
 cap = cv.VideoCapture(0)
@@ -26,6 +27,8 @@ def generate_frames():
             face_box = track_face(frame, smoothing=settings.tracking_smoothing_alpha)
             frame = apply_framing(frame, face_box, zoom_margin=settings.zoom_margin, smoothing=settings.tracking_smoothing_alpha,)
 
+        send_frame(frame)
+        
         ret2, buffer = cv.imencode('.jpg', frame)
         if not ret2:
             continue
