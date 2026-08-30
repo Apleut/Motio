@@ -8,9 +8,13 @@ Motio is a lightweight program that adjusts your camera to track your face using
 
 ### Settings
 Once you open Motio, you can configure the following settings in the side panel:
+
   **Camera:** Select the camera input device
+
   **Face Tracking:** Toggle the face tracking and adjustment
+  
   **Framing Margin:** How "far away" your face is from the camera
+  
   **Pan Smoothing:** How slow the camera should move
 
 You can reset your settings to their defaults via the button at the bottom.
